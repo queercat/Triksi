@@ -6,19 +6,21 @@ import { messageHandler } from "./handlers/messageHandler"
 import { AppStorage } from "./utilities/storage"
 import { useLoadCardData } from "./hooks/card/useLoadCardData"
 import { registerListeners } from "./utilities/registerListeners"
-import { StorageEntities } from "./data/StorageEntities"
+import { buildNameMap } from "./utilities/buildNameMap"
 
 const { loadCardData } = useLoadCardData()
 
 export const API_KEY = env.API_KEY
 export const PERMISSION_INTEGER = Number(env.PERMISSION_INTEGER)
 
-// Injects the storage object into the global scope so we can use it anywhere. Technically export is fine too but I like this.
+// Injects the storage objects into the global scope so we can use it anywhere. Technically export is fine too but I like this.
 declare global {
-  var storage: AppStorage
+  var storage: AppStorage<string>
+  var cardNameMap: AppStorage<any>
 }
 
 global.storage = new AppStorage()
+global.cardNameMap = new AppStorage()
 
 if (!API_KEY) throw new Error("API_KEY is not defined")
 if (!PERMISSION_INTEGER) throw new Error("PERMISSION_INTEGER is not defined")
@@ -34,7 +36,11 @@ const main = async () => {
   }
   console.log("Card data loaded into memory.")
 
-  console.log(storage.get(StorageEntities.CardData))
+  const cardNameMapError = await buildNameMap()
+
+  if (cardNameMapError) {
+    throw new Error("Failed to build card name map.")
+  }
 
   console.log("Logging in...")
   const client = login(API_KEY)
