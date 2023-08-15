@@ -11,7 +11,6 @@ import { buildNameMap } from "./utilities/buildNameMap"
 const { loadCardData } = useLoadCardData()
 
 export const API_KEY = env.API_KEY
-export const PERMISSION_INTEGER = Number(env.PERMISSION_INTEGER)
 
 // Injects the storage objects into the global scope so we can use it anywhere. Technically export is fine too but I like this.
 declare global {
@@ -23,7 +22,6 @@ global.storage = new AppStorage()
 global.cardNameMap = new AppStorage()
 
 if (!API_KEY) throw new Error("API_KEY is not defined")
-if (!PERMISSION_INTEGER) throw new Error("PERMISSION_INTEGER is not defined")
 
 // We encapsulate the main function in an async function so we can use await on certain setup functions.
 const main = async () => {
