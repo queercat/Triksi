@@ -1,11 +1,11 @@
 import { Client, ClientEvents, Message } from "discord.js"
 
 import { env } from "./env"
-import { login } from "./helpers/login"
+import { login } from "./utilities/login"
 import { messageHandler } from "./handlers/messageHandler"
-import { AppStorage } from "./helpers/storage"
+import { AppStorage } from "./utilities/storage"
 import { useLoadCardData } from "./hooks/card/useLoadCardData"
-import { registerListeners } from "./helpers/registerListeners"
+import { registerListeners } from "./utilities/registerListeners"
 import { StorageEntities } from "./data/StorageEntities"
 
 const { loadCardData } = useLoadCardData()
