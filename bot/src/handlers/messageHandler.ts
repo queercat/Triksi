@@ -11,7 +11,9 @@ export const messageHandler = async (message: Message) => {
     const matches = content.matchAll(regex)
     if (matches) {
       for (const match of matches) {
-        cardNames.push(match.groups.query)
+        if(match.groups?.query) {  
+          cardNames.push(match.groups.query)
+        }
       }
     }
   }
