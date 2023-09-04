@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "ts-node ./src/triksi.ts",
+    "watch": "ts-node ./src/triksi.ts -w",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
