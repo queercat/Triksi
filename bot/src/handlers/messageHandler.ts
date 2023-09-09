@@ -1,3 +1,4 @@
+import { cardFetcher } from "./executors/cardFetcher"
 import { Message } from "discord.js"
 
 // Regex to match [[text]] but not [[text[[text]]text]]]] only [[text]] or [[ text ]] or [[ text 123 ]]
@@ -30,7 +31,6 @@ export const messageHandler = async (message: Message) => {
     }
   })
 
-  if (reply.length > 0) {
-    message.reply(reply)
-  }
+  cardFetcher(message, content)
 }
+

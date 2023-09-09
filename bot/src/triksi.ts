@@ -1,4 +1,4 @@
-import { Client, ClientEvents, Message } from "discord.js"
+import { ClientEvents } from "discord.js"
 
 import { env } from "./env"
 import { login } from "./utilities/login"
